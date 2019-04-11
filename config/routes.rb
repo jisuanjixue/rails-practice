@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   end
 
   root "events#index"
+  get "/faq", to: "pages#faq"
 
 end
