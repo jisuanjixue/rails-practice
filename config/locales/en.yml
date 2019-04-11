@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  event_list: Event_list
+  admin:
+    event_list: Admin Event List
