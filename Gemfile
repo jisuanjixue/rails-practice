@@ -38,6 +38,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem "rails-i18n"
 gem "devise-i18n"
+# 针对下拉选项很多时的包
+gem "select2-rails"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

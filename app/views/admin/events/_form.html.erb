@@ -40,3 +40,9 @@
   <%= f.text_field :random_id, :required => true, :class => "form-control" %>
   <p class="help-block">限小写英数字及横线，将作为网址的一部分</p>
 </div>
+
+<script>
+  $("#event_category_id").select2( { theme: "bootstrap"} );
+</script>
+
+<%# 其中 event_category_id 是这个 select 下拉选单的 HTML ID %>
