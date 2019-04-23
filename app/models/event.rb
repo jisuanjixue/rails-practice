@@ -6,6 +6,10 @@ class Event < ApplicationRecord
 
  before_validation :generate_random_id, on: :create
 
+ # 加上状态字段的验证
+ STATUS = ["草稿", "公开", "私人"]
+ validates_inclusion_of :status, :in => STATUS
+
  # 在调用路由方法时，Rails 默认都会用 to_param 方法来转换 ID,
 #  def to_param
 #    self.id
