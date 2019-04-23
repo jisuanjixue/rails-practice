@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
 
+  belongs_to :category, :optional => true
+
  validates_presence_of :name, :random_id
  validates_uniqueness_of :random_id, message: "必须不相同"
  validates_format_of :random_id, with: /\A[a-z0-9\-]+\z/, message: "无效的格式"
