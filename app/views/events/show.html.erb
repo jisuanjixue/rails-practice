@@ -3,3 +3,8 @@
 
 <%= simple_format @event.description %>
 <h2><%= t(@event.status, :scope => "event.status") %></h2>
+<h2><%= @event.category.try(:name) %></h2>
+
+<%# 活动的 category_id 是后来才增加的字段，因此有些活动是没有 category_id 资料的, 点其他还没有选分类的活动会报错，
+这是因为 @event.category 是 nil，再调用 nil.name 就会出现 NoMethodError 了，
+Rails 提供了一个 try 方法，参数就是要调用的方法名称。透过 try 不管是不是 nil，都不会报错 %>
