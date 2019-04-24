@@ -1,0 +1,16 @@
+<h1>后台用户</h1>
+
+<table>
+  <tr>
+  <th>ID</th>
+  <th>邮箱</th>
+  <th>操作</th>
+</tr>
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.id %></td>
+    <td><%= user.email %></td>
+    <td><%= link_to "编辑", edit_admin_user_path(user), :class => "btn btn-default" %></td>
+  </tr>
+<% end %>
+</table>
