@@ -1,0 +1,43 @@
+<h2>编辑个人信息</h2>
+<%= form_for @profile, :url => admin_user_profile_path(@user) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :名称 %>
+    <%= f.text_field :legal_name, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :生日 %>
+    <%= f.date_field :birthday, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :居住地 %>
+    <%= f.text_field :location, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :学习 %>
+    <%= f.text_field :education, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :职业 %>
+    <%= f.text_field :occupation, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :个人简历 %>
+    <%= f.text_area :bio, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :专业 %>
+    <%= f.text_area :specialty, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "提交", :class => "btn btn-primary" %>
+  </div>
+
+<% end %>
