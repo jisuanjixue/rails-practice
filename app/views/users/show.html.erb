@@ -1,0 +1,6 @@
+<h1>我的个人资料</h1>
+
+<p>电子邮箱: <%= @user.email %></p>
+<p>时区: <%= @user.time_zone %></p>
+<p>生日: <%= @user.profile.birthday %></p>
+<p>个人简历: <%= simple_format @user.profile.bio %></p>
