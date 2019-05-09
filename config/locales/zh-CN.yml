@@ -1,4 +1,6 @@
 "zh-CN":
   event_list: 活动列表
+  bulk_update: 批量编辑
+  bulk_delete: 批量删除
   admin:
     event_list: 活动列表管理
