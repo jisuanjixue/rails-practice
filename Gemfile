@@ -44,6 +44,8 @@ gem "select2-rails"
 gem "nested_form_fields"
 # 选日期时间的 UI
 gem 'bootstrap-datepicker-rails'
+# 编辑器
+gem 'ckeditor', '4.2.4'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
