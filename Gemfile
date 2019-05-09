@@ -42,6 +42,8 @@ gem "devise-i18n"
 gem "select2-rails"
 # 动态一直新增表单
 gem "nested_form_fields"
+# 选日期时间的 UI
+gem 'bootstrap-datepicker-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
