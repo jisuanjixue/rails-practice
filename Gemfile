@@ -40,6 +40,8 @@ gem "rails-i18n"
 gem "devise-i18n"
 # 针对下拉选项很多时的包
 gem "select2-rails"
+# 动态一直新增表单
+gem "nested_form_fields"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

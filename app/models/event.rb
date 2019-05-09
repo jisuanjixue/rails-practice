@@ -1,8 +1,10 @@
 class Event < ApplicationRecord
-
+  has_many :tickets, :dependent => :destroy, :inverse_of  => :event
   belongs_to :category, :optional => true
-
- validates_presence_of :name, :random_id
+  # 某些版本的Rails 有个accepts_nested_attributes_for 的bug 让has_many 故障了，需要额外补上inverse_of 参数，不然存储时会找不到tickets
+  accepts_nested_attributes_for :tickets, :reject_if => :all_blank, allow_destroy: true
+ 
+  validates_presence_of :name, :random_id
  validates_uniqueness_of :random_id, message: "必须不相同"
  validates_format_of :random_id, with: /\A[a-z0-9\-]+\z/, message: "无效的格式"
 
