@@ -1,6 +1,6 @@
 class Admin::EventTicketsController < AdminController
   before_action :find_event
-  before_action :find_ticket, only: [:edit, :update]
+  before_action :find_ticket, only: [:edit, :update, :destroy]
 
   def index
     @tickets = @event.tickets
