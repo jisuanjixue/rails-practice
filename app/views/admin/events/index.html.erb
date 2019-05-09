@@ -1,20 +1,21 @@
 <h1><%= t("admin.event_list") %></h1>
 
 <p class="text-right">
-<%= link_to "New Event", new_admin_event_path, :class => "btn btn-primary" %>
+<%= link_to "新建活动", new_admin_event_path, :class => "btn btn-primary" %>
 </p>
 
 <table class="table">
 <tr>
-  <th>Event Name</th>
-  <th>Actions</th>
+  <th>活动名称</th>
+  <th>操作</th>
 </tr>
 <% @events.each do |event| %>
   <tr>
     <td><%= link_to event.name, admin_event_path(event) %></td>
     <td>
-      <%= link_to "Edit", edit_admin_event_path(event), :class => "btn btn-default" %>
-      <%= link_to "Delete", admin_event_path(event), :method => "delete", :data => { :confirm => "Are you sure?" }, :class => "btn btn-danger" %>
+      <%= link_to "票种", admin_event_tickets_path(event), :class => "btn btn-default" %>
+      <%= link_to "编辑", edit_admin_event_path(event), :class => "btn btn-default" %>
+      <%= link_to "删除", admin_event_path(event), :method => "delete", :data => { :confirm => "确定要删除吗?" }, :class => "btn btn-danger" %>
   </tr>
 <% end %>
 </table>

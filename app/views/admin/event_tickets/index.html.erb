@@ -1,0 +1,24 @@
+<h1><%= @event.name %> / 票种</h1>
+
+<p class="text-right">
+<%= link_to "新建票种", new_admin_event_ticket_path(@event), :class => "btn btn-primary" %>
+</p>
+
+<table class="table">
+<tr>
+  <th>名称</th>
+  <th>价格</th>
+  <th>描述</th>
+  <th>操作</th>
+</tr>
+<% @tickets.each do |ticket| %>
+  <tr>
+    <td><%= ticket.name %></td>
+    <td><%= ticket.price %></td>
+    <td><%= simple_format ticket.description %></td>
+    <td>
+      <%= link_to "编辑", edit_admin_event_ticket_path(@event, ticket), :class => "btn btn-default" %>
+      <%= link_to "删除", admin_event_ticket_path(@event, ticket), :method => "delete", :data => { :confirm => "确定要删除吗?" }, :class => "btn btn-danger" %>
+  </tr>
+<% end %>
+</table>

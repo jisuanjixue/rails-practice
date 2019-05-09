@@ -1,0 +1,12 @@
+<h1>编辑票种</h1>
+
+<%= form_for [:admin, @event, @ticket] do |f| %>
+
+  <%= render :partial => "form", :locals => { :f => f } %>
+
+  <div class="form-group">
+    <%= f.submit "更新", :class => "btn btn-primary" %>
+    <%= link_to "取消", admin_event_tickets_path(@event) %>
+  </div>
+
+<% end %>

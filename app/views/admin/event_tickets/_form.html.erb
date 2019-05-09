@@ -1,0 +1,24 @@
+<% if @ticket.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @ticket.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="form-group">
+  <%= f.label :名称 %>
+  <%= f.text_field :name, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :价格 %>
+  <%= f.number_field :price, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :描述 %>
+  <%= f.text_area :description, :class => "form-control" %>
+</div>
