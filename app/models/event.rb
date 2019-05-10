@@ -1,4 +1,8 @@
 class Event < ApplicationRecord
+  #排序
+  include RankedModel
+  ranks :row_order
+  
   has_many :tickets, :dependent => :destroy, :inverse_of  => :event
   belongs_to :category, :optional => true
   # 某些版本的Rails 有个accepts_nested_attributes_for 的bug 让has_many 故障了，需要额外补上inverse_of 参数，不然存储时会找不到tickets

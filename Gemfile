@@ -46,6 +46,12 @@ gem "nested_form_fields"
 gem 'bootstrap-datepicker-rails'
 # 编辑器
 gem 'ckeditor', '4.2.4'
+#自定义顺序
+gem 'ranked-model'
+# 拖拉的 UI 的前端套件
+gem 'jquery-ui-rails'
+
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
