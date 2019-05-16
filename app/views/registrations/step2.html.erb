@@ -1,0 +1,27 @@
+<h1><%= @event.name %></h1>
+
+<h2>第二步</h2>
+
+<%= form_for @registration, :url => update_step2_event_registration_path(@event, @registration) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :名称 %>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :邮箱 %>
+    <%= f.email_field :email, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :手机 %>
+    <%= f.text_field :cellphone, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+        <%= link_to "上一步", step1_event_registration_path(@event, @registration), :class => "btn btn-default" %>
+    <%= f.submit "下一步", :class => "btn btn-primary" %>
+  </div>
+
+<% end %>
