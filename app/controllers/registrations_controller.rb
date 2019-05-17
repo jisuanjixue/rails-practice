@@ -4,16 +4,21 @@ class RegistrationsController < ApplicationController
   def new
   end
 
+  # 每次调用 save 存进数据库前，设定一下 current_step 的值，这样就可以有条件的触发对应的资料验证了
   def create
     @registration = @event.registrations.new(registration_params)
     # 这里针对 ticket 额外用 @event.tickets.find 再检查确定这个票种属于这个活动
     @registration.ticket = @event.tickets.find( params[:registration][:ticket_id] )
     @registration.status = "pending"
     @registration.user = current_user
+    @registration.current_step = 1
 
     if @registration.save
       redirect_to step2_event_registration_path(@event, @registration)
     else
+      # 本来的 flash 搭配的是 redirect，这会在跳转后清空 flash 讯息(所以只会显示一次)。
+     # 这里因为并不是 redirect 跳转，而是用 render 显示页面，这种情况要改用 flash.now
+      flash.now[:alert] = @registration.errors[:base].join("、")
       render "new"
     end
   end
@@ -24,6 +29,7 @@ class RegistrationsController < ApplicationController
 
   def step1_update
     @registration = @event.registrations.find_by_uuid(params[:id])
+    @registration.current_step = 1
 
     if @registration.update(registration_params)
       redirect_to step2_event_registration_path(@event, @registration)
@@ -38,6 +44,7 @@ class RegistrationsController < ApplicationController
 
   def step2_update
     @registration = @event.registrations.find_by_uuid(params[:id])
+    @registration.current_step = 2
 
     if @registration.update(registration_params)
       redirect_to step3_event_registration_path(@event, @registration)
@@ -52,6 +59,7 @@ class RegistrationsController < ApplicationController
 
   def step3_update
     @registration = @event.registrations.find_by_uuid(params[:id])
+    @registration.current_step = 3
     @registration.status = "confirmed"
 
     if @registration.update(registration_params)
