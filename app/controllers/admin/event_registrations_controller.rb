@@ -29,7 +29,12 @@ class Admin::EventRegistrationsController < ApplicationController
     if params[:end_on].present?
       @registrations = @registrations.where( "created_at <= ?", Date.parse(params[:end_on]).end_of_day )
     end
-      
+
+    # 字段查询
+    if params[:registration_id].present?
+      @registrations = @registrations.where( :id => params[:registration_id].split(",") )
+    end
+
   end
 
   def edit
