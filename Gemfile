@@ -52,6 +52,8 @@ gem 'ranked-model'
 gem 'jquery-ui-rails'
 # 分页
 gem 'kaminari'
+# 搜索,只要符合部分关键字就好，用数据库的 LIKE 搜寻 语法
+gem 'ransack'
 
 
 

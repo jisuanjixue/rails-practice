@@ -3,7 +3,9 @@ class Admin::EventRegistrationsController < ApplicationController
   before_action :find_registration, :only => [:edit, :update, :destroy]
 
   def index
-    @registrations = @event.registrations.includes(:ticket).order("id DESC")
+    #字段查询
+    @q = @event.registrations.ransack(params[:q])
+    @registrations = @q.result.includes(:ticket).order("id DESC")
     # 单选
     if params[:status].present? && Registration::STATUS.include?(params[:status])
       @registrations = @registrations.by_status(params[:status])
@@ -30,7 +32,7 @@ class Admin::EventRegistrationsController < ApplicationController
       @registrations = @registrations.where( "created_at <= ?", Date.parse(params[:end_on]).end_of_day )
     end
 
-    # 字段查询
+    # 字段查询，会要完全一模一样(exact match)才会筛选出来
     if params[:registration_id].present?
       @registrations = @registrations.where( :id => params[:registration_id].split(",") )
     end
