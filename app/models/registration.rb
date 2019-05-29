@@ -11,6 +11,10 @@ class Registration < ApplicationRecord
   # 自定义一个资料验证, validate 可以增加自定义的资料验证，后面的 :on => :create 参数可以指定只有新建才会验证(默认是新建跟修改都会验证)
   validate :check_event_status, :on => :create
 
+  # scope 的作用是将常用的查询条件宣告起来，方便重复使用
+  scope :by_status, ->(s){ where( :status => s ) }
+  scope :by_ticket, ->(t){ where( :ticket_id => t ) }
+
   belongs_to :event
   belongs_to :ticket
   belongs_to :user, :optional => true

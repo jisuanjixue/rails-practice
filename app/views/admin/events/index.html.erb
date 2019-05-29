@@ -34,6 +34,7 @@
             <%# 在路由方法 reorder_admin_event_path 中，我们额外传了 :position 参数，等会在 controller 中就可以接收到 params[:position] 代表移动的方式 %>
             <%= link_to "置顶", reorder_admin_event_path(event, :position => :first), :method => :post, :class => "btn btn-default" %>
             <%= link_to "置底", reorder_admin_event_path(event, :position => :last), :method => :post, :class => "btn btn-default" %>
+            <%= link_to "Registrations", admin_event_registrations_path(event), :class => "btn btn-default" %>
             <%= link_to "票种", admin_event_tickets_path(event), :class => "btn btn-default" %>
             <%= link_to "编辑", edit_admin_event_path(event), :class => "btn btn-default" %>
             <%= link_to "删除", admin_event_path(event), :method => "delete", :data => { :confirm => "确定要删除吗?" }, :class => "btn btn-danger" %>

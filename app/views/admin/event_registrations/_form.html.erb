@@ -1,0 +1,29 @@
+<% if @registration.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @registration.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="form-group">
+  <%= f.label :票种 %>
+   <%= f.select :ticket_id, Ticket.all.map{ |s| [s.name, s.id] }, {}, class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :名称 %>
+  <%= f.text_field :name, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :状态 %>
+  <%= f.text_area :status, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :电子邮箱 %>
+  <%= f.text_area :email, :class => "form-control" %>
+</div>

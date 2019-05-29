@@ -50,6 +50,8 @@ gem 'ckeditor', '4.2.4'
 gem 'ranked-model'
 # 拖拉的 UI 的前端套件
 gem 'jquery-ui-rails'
+# 分页
+gem 'kaminari'
 
 
 
