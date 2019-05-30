@@ -58,6 +58,10 @@ gem 'ransack'
 gem 'mini_magick'
 # 软删除和版本控制,进行复原的动作,建立追踪和稽核的机制
 gem 'paper_trail'
+# 汇出Excel格式
+gem 'rubyzip'
+gem 'axlsx'
+gem 'axlsx_rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

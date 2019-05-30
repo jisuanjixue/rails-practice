@@ -41,6 +41,7 @@ class Admin::EventRegistrationsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.xlsx
       format.csv do
         @registrations = @registrations.reorder('id ASC')
         csv_string = CSV.generate do |csv|
