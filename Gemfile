@@ -56,6 +56,8 @@ gem 'carrierwave'
 # 图片文档
 gem 'ransack'
 gem 'mini_magick'
+# 软删除和版本控制,进行复原的动作,建立追踪和稽核的机制
+gem 'paper_trail'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

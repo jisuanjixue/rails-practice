@@ -2,6 +2,8 @@ class Registration < ApplicationRecord
   # 透过 attr_accessor :current_step 我们增加一个虚拟属性(也就是数据库中并没有这个字段)来代表目前做到哪一步
   attr_accessor :current_step
   STATUS = ["pending", "confirmed"]
+  # 软删除和版本控制
+  has_paper_trail
   # 设定状态是其中的一种
   validates_inclusion_of :status, in: STATUS
   validates_presence_of :status, :ticket_id
