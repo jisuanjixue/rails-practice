@@ -1,18 +1,18 @@
 <h1><%= @event.name %> / Registrations</h1>
 
 <p class="text-right">
-<%= link_to "New Registration", new_admin_event_registration_path(@event), :class => "btn btn-primary" %>
+  <%= link_to "New Registration", new_admin_event_registration_path(@event), :class => "btn btn-primary" %>
 </p>
 
 
 <div class="submenu">
- <%# 样板中如果有大范围暂时需要注解，可以用 <% if false .... <% end %>  
- <%# 包起来  %>
+  <%# 样板中如果有大范围暂时需要注解，可以用 <% if false .... <% end %>
+  <%# 包起来  %>
   <% if false %>
   <div class="btn-group">
     <%= link_to "全部(#{@event.registrations.size})", admin_event_registrations_path(registration_filters(:status => nil)), :class => "btn btn-success btn-group #{(params[:status].blank?) ? "active" : ""}" %>
     <% Registration::STATUS.each do |s| %>
-      <%= link_to t(s, :scope => "registration.status") + " (#{@event.registrations.by_status(s).size})",   admin_event_registrations_path(registration_filters(:status => s)), :class => "btn btn-success btn-group #{(  params[:status] == s) ? "active" : ""}" %>
+    <%= link_to t(s, :scope => "registration.status") + " (#{@event.registrations.by_status(s).size})",   admin_event_registrations_path(registration_filters(:status => s)), :class => "btn btn-success btn-group #{(  params[:status] == s) ? "active" : ""}" %>
     <% end %>
   </div>
   <% end %>
@@ -21,48 +21,52 @@
   <div class="btn-group">
     <%= link_to "全部 (#{@event.registrations.size})", admin_event_registrations_path(registration_filters(:ticket_id => nil)), :class => "btn btn-default btn-group #{(params[:ticket_id].blank?) ? "active" : ""}" %>
     <% @event.tickets.each do |t| %>
-      <%= link_to "#{t.name}" "(#{@event.registrations.by_ticket(t).size})", admin_event_registrations_path(registration_filters(:ticket_id => t.id)), :class => "btn btn-default btn-group #{(params[:ticket_id].to_i == t.id) ? "active" : ""}" %>
+    <%= link_to "#{t.name}" "(#{@event.registrations.by_ticket(t).size})", admin_event_registrations_path(registration_filters(:ticket_id => t.id)), :class => "btn btn-default btn-group #{(params[:ticket_id].to_i == t.id) ? "active" : ""}" %>
     <% end %>
   </div>
   <% end %>
 
-   <%# <%= form_tag admin_event_registrations_path(@event), :method => :get do %>
-   <%= search_form_for @q, :url => admin_event_registrations_path(@event) do |f| %>
-   <%# search_field 是 ransack 独到的方法，后面的 :name_cont 代表 name 这个字段要包含(contains)的关键字 %>
-   <p><%= f.search_field :name_cont, :placeholder => "姓名", :class => "form-control" %></p>
-   <p><%= f.search_field :email_cont, :placeholder => "电子邮箱", :class => "form-control" %></p>
-    <p><%= text_field_tag :registration_id, params[:registration_id], :placeholder => "报名编号，可用,号区隔", :class => "form-control" %></p>
+  <%# <%= form_tag admin_event_registrations_path(@event), :method => :get do %>
+  <%= search_form_for @q, :url => admin_event_registrations_path(@event) do |f| %>
+  <%# search_field 是 ransack 独到的方法，后面的 :name_cont 代表 name 这个字段要包含(contains)的关键字 %>
+  <p><%= f.search_field :name_cont, :placeholder => "姓名", :class => "form-control" %></p>
+  <p><%= f.search_field :email_cont, :placeholder => "电子邮箱", :class => "form-control" %></p>
+  <p>
+    <%= text_field_tag :registration_id, params[:registration_id], :placeholder => "报名编号，可用,号区隔", :class => "form-control" %>
+  </p>
 
-      <p><% Registration::STATUS.each do |s| %>
-        <label><%= check_box_tag "statuses[]", s, Array(params[:statuses]).include?(s) %> <%= t(s, :scope =>  "registration.status") %> (<%= @event.registrations.by_status(s).size %>)</label>
-      <% end %></p>
+  <p><% Registration::STATUS.each do |s| %>
+    <label><%= check_box_tag "statuses[]", s, Array(params[:statuses]).include?(s) %>
+      <%= t(s, :scope =>  "registration.status") %> (<%= @event.registrations.by_status(s).size %>)</label>
+    <% end %></p>
 
-      <p><% @event.tickets.each do |t| %>
-        <label><%= check_box_tag "ticket_ids[]", t.id, Array(params[:ticket_ids]).include?(t.id.to_s) %> <%= t.name %> (<%=  @event.registrations.where( :ticket_id => t.id ).size %>)</label>
-      <% end %>
-      </p>
-
-      <p>
-        报名日期：<%= date_field_tag :start_on, params[:start_on] %>～<%= date_field_tag :end_on, params[:end_on] %>
-      </p>
-      
-      <p class="text-right">
-        <%= submit_tag "送出筛选", :class => "btn btn-primary" %>
-      </p>
+  <p><% @event.tickets.each do |t| %>
+    <label><%= check_box_tag "ticket_ids[]", t.id, Array(params[:ticket_ids]).include?(t.id.to_s) %> <%= t.name %>
+      (<%=  @event.registrations.where( :ticket_id => t.id ).size %>)</label>
     <% end %>
+  </p>
+
+  <p>
+    报名日期：<%= date_field_tag :start_on, params[:start_on] %>～<%= date_field_tag :end_on, params[:end_on] %>
+  </p>
+
+  <p class="text-right">
+    <%= submit_tag "送出筛选", :class => "btn btn-primary" %>
+  </p>
+  <% end %>
 </div>
 
 <table class="table">
-<tr>
-  <th>序号</th>
-  <th>票种</th>
-  <th>名称</th>
-  <th>状态</th>
-  <th>电子邮箱</th>
-  <th>建立时间</th>
-  <th>操作</th>
-</tr>
-<% @registrations.each do |registration| %>
+  <tr>
+    <th>序号</th>
+    <th>票种</th>
+    <th>名称</th>
+    <th>状态</th>
+    <th>电子邮箱</th>
+    <th>建立时间</th>
+    <th>操作</th>
+  </tr>
+  <% @registrations.each do |registration| %>
   <tr>
     <td><%= registration.id %></td>
     <td><%= registration.ticket.name %></td>
@@ -74,5 +78,10 @@
       <%= link_to "编辑", edit_admin_event_registration_path(@event, registration), :class => "btn btn-default" %>
       <%= link_to "删除", admin_event_registration_path(@event, registration), :method => "delete", :data => { :confirm => "Are you sure?" }, :class => "btn btn-danger" %>
   </tr>
-<% end %>
+  <% end %>
 </table>
+<%= paginate @registrations %>
+
+<p>
+  <%= link_to "汇出 CSV", admin_event_registrations_path(:format => :csv), :class => "btn btn-default" %>
+</p>
