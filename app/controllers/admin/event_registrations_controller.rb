@@ -1,11 +1,11 @@
 class Admin::EventRegistrationsController < ApplicationController
   before_action :find_event
-  before_action :find_registration, :only => [:edit, :update, :destroy]
+  before_action :find_registration, only: %i[edit update destroy]
 
   def index
-    #字段查询
+    # 字段查询
     @q = @event.registrations.ransack(params[:q])
-    @registrations = @q.result.includes(:ticket).order("id DESC")
+    @registrations = @q.result.includes(:ticket).order('id DESC').page(params[:page])
     # 单选
     if params[:status].present? && Registration::STATUS.include?(params[:status])
       @registrations = @registrations.by_status(params[:status])
@@ -18,29 +18,27 @@ class Admin::EventRegistrationsController < ApplicationController
     if Array(params[:statuses]).any?
       @registrations = @registrations.by_status(params[:statuses])
     end
-      
+
     if Array(params[:ticket_ids]).any?
       @registrations = @registrations.by_ticket(params[:ticket_ids])
     end
 
     # 时间段查询
     if params[:start_on].present?
-      @registrations = @registrations.where( "created_at >= ?", Date.parse(params[:start_on]).beginning_of_day )
+      @registrations = @registrations.where('created_at >= ?', Date.parse(params[:start_on]).beginning_of_day)
     end
-      
+
     if params[:end_on].present?
-      @registrations = @registrations.where( "created_at <= ?", Date.parse(params[:end_on]).end_of_day )
+      @registrations = @registrations.where('created_at <= ?', Date.parse(params[:end_on]).end_of_day)
     end
 
     # 字段查询，会要完全一模一样(exact match)才会筛选出来
     if params[:registration_id].present?
-      @registrations = @registrations.where( :id => params[:registration_id].split(",") )
+      @registrations = @registrations.where(id: params[:registration_id].split(','))
     end
-
   end
 
-  def edit
-  end
+  def edit; end
 
   def new
     @registration = @event.registrations.new
@@ -54,13 +52,13 @@ class Admin::EventRegistrationsController < ApplicationController
   end
 
   def create
-     @registration = @event.registrations.new(registration_params)
-     if @registration.save
+    @registration = @event.registrations.new(registration_params)
+    if @registration.save
       flash[:success] = '新增成功！'
       redirect_to admin_event_registrations_path(@event)
     else
       render 'new'
-    end
+   end
   end
 
   def update

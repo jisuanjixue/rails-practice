@@ -1,13 +1,13 @@
 <% if @event.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@event.errors.count, "error") %> prohibited this person from being saved:</h2>
+<div id="error_explanation">
+  <h2><%= pluralize(@event.errors.count, "error") %> prohibited this person from being saved:</h2>
 
-    <ul>
+  <ul>
     <% @event.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+    <li><%= msg %></li>
     <% end %>
-    </ul>
-  </div>
+  </ul>
+</div>
 <% end %>
 
 <div class="form-group">
@@ -23,16 +23,16 @@
 <div class="form-group">
   <%= f.label :category_id %>
   <%= f.select :category_id, Category.all.map{ |s| [s.name, s.id] }, {}, class: "form-control" %>
-</div> 
+</div>
 
 <div class="form-group">
- <%= f.label :status %>
- <% Event::STATUS.each do |status| %>
+  <%= f.label :status %>
+  <% Event::STATUS.each do |status| %>
   <label>
     <%= f.radio_button :status, status %>
     <%= t(status, scope: "event.status") %>
   </label>
-<% end %>
+  <% end %>
 </div>
 
 <div class="form-group">
@@ -41,33 +41,47 @@
   <p class="help-block">限小写英数字及横线，将作为网址的一部分</p>
 </div>
 
+<div class="form-group">
+  <%= f.label :images %>
+  <%= f.file_field :images, :multiple => true, :class => "form-control" %>
+  <% if f.object.images.present? %>
+  <label>
+    <%= f.check_box :remove_images %> 删除图档
+  </label>
+  <% f.object.images.each do |i| %>
+  <%= link_to i.filename, i.url, :target => "_blank" %>
+  <% end %>
+  <% end %>
+</div>
+
 <%= f.nested_fields_for :tickets do |ff| %>
-  <fieldset style="border-left: 5px solid #bbb; margin-bottom: 10px; padding: 10px;">
-    <legend>票种</legend>
-    <div class="form-group">
-      <%= ff.label :名称 %>
-      <%= ff.text_field :name, :class => "form-control" %>
-    </div>
+<fieldset style="border-left: 5px solid #bbb; margin-bottom: 10px; padding: 10px;">
+  <legend>票种</legend>
+  <div class="form-group">
+    <%= ff.label :名称 %>
+    <%= ff.text_field :name, :class => "form-control" %>
+  </div>
 
-    <div class="form-group">
-      <%= ff.label :价格 %>
-      <%= ff.number_field :price, :class => "form-control" %>
-    </div>
+  <div class="form-group">
+    <%= ff.label :价格 %>
+    <%= ff.number_field :price, :class => "form-control" %>
+  </div>
 
-    <div class="form-group">
-      <%= ff.label :描述 %>
-      <%= ff.text_area :description, :class => "form-control" %>
-    </div>
-  </fieldset>
-  <%= ff.remove_nested_fields_link "移除这个票种", :class => "btn btn-danger" %>
+  <div class="form-group">
+    <%= ff.label :描述 %>
+    <%= ff.text_area :description, :class => "form-control" %>
+  </div>
+</fieldset>
+<%= ff.remove_nested_fields_link "移除这个票种", :class => "btn btn-danger" %>
+
 <% end %>
 
-  <p class="text-right">
-    <%= f.add_nested_fields_link :tickets, "新增票种", :class => "btn btn-default" %>
-  </p>
+<p class="text-right">
+  <%= f.add_nested_fields_link :tickets, "新增票种", :class => "btn btn-default" %>
+</p>
 
 <script>
-  $("#event_category_id").select2( { theme: "bootstrap"} );
+  $("#event_category_id").select2({ theme: "bootstrap" });
 </script>
 
 <%# 其中 event_category_id 是这个 select 下拉选单的 HTML ID %>

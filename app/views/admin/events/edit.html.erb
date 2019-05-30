@@ -2,10 +2,10 @@
 
 <%= form_for [:admin, @event] do |f| %>
 
-  <%= render :partial => "form", :locals => { :f => f } %>
+<%= render :partial => "form", :locals => { :f => f } %>
 
-  <div class="form-group">
-    <%= f.submit "Update", :class => "btn btn-primary" %>
-    <%= link_to "Cancel", admin_events_path %>
-  </div>
+<div class="form-group">
+  <%= f.submit "Update", :class => "btn btn-primary" %>
+  <%= link_to "Cancel", admin_events_path %>
+</div>
 <% end %>
