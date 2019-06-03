@@ -3,6 +3,7 @@ require 'csv'
 class Admin::EventRegistrationsController < ApplicationController
   before_action :find_event
   before_action :find_registration, only: %i[edit update destroy]
+  before_action :require_editor!
 
   def index
     # 字段查询

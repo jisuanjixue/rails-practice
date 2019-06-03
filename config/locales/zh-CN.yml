@@ -6,6 +6,10 @@
   status:
   pending: 报名尚未完成
   confirmed: 报名成功
+  user:
+  role:
+  admin: 超级管理员
+  editor: 活动管理员
 
   admin:
     event_list: 活动列表管理
