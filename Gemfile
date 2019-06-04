@@ -62,6 +62,10 @@ gem 'paper_trail'
 gem 'rubyzip'
 gem 'axlsx'
 gem 'axlsx_rails'
+# 不需要真的寄出 E-mail, 在寄信时，自动打开浏览器进行预览
+gem 'letter_opener'
+# E-mail CSS 样式
+gem 'premailer-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
